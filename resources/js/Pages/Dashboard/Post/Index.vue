@@ -1,3 +1,3 @@
 <template>
-    <h1>Hola mundo</h1>
+  <aside>Menu de inico</aside>
 </template>

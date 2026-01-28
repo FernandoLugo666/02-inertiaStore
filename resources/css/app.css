@@ -5,3 +5,7 @@
 [x-cloak] {
     display: none;
 }
+
+:root {
+    --bg-general: #1f2937;
+}
