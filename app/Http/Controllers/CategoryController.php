@@ -16,10 +16,37 @@ class CategoryController extends Controller
 
     public function create(CategoryRequest $request)
     {
-        //dd($request->all());
         Category::create([
             'title' => $request->title,
             'slug' => $request->slug
         ]);
+    }
+
+
+    public function listCategory()
+    {
+        $data = Category::get();
+
+        return Inertia::render(
+            "Dashboard/Category/ListCategory",
+            [
+                "data" => $data
+            ]
+        );
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+
+        $data = Category::findOrFail($id);
+        if ($request->isMethod('PUT')) {
+            $data->update([
+                'title' => $request->title,
+                'slug'  => $request->slug,
+                'text'  => $request->text,
+            ]);
+        }
+
+        return Inertia::render('Dashboard/Category/UpdateCategory', ["data" => $data]);
     }
 }

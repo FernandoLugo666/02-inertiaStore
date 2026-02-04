@@ -34,5 +34,7 @@ Route::get('/', [InicioController::class, 'sidebar'])->name('sidebar@@');
 Route::group(['prefix' => 'category'], function () {
     Route::get('/create-view', [CategoryController::class, 'createView'])->name('createView');
     Route::post('/create', [CategoryController::class, 'create'])->name('create');
-    Route::post('/list-category', [CategoryController::class, 'listCategory'])->name('listCategory');
+    Route::get('/list-category', [CategoryController::class, 'listCategory'])->name('listCategory');
+    Route::get('/update-category/{id}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
+    Route::put('/update-category/{id}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
 });

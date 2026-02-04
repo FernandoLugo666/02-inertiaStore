@@ -18,6 +18,7 @@
         :invalid="errorField('prueba')"
       />
     </div>
+    <Toast />
     <div class="flex justify-center items-center pt-5">
       <Button label="Enviar" type="submit" />
     </div>
@@ -29,6 +30,10 @@ import CustomInputField from "@/Components/CustomInputField.vue";
 import { useForm } from "@inertiajs/vue3";
 import Button from "primevue/button";
 import Title from "@/Components/Title.vue";
+import Toast from "primevue/toast";
+import { useToast } from "primevue";
+
+const toast = useToast();
 
 defineOptions({
   layout: AppLayout,
