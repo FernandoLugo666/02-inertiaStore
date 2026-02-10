@@ -37,4 +37,6 @@ Route::group(['prefix' => 'category'], function () {
     Route::get('/list-category', [CategoryController::class, 'listCategory'])->name('listCategory');
     Route::get('/update-category/{id}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
     Route::put('/update-category/{id}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
+    Route::delete("/delete-category/{id}", [CategoryController::class, 'deleteCategory'])->name("deleteCategory");
+    Route::get("/delete-category/{id}", [CategoryController::class, 'deleteCategory'])->name("deleteCategory");
 });
