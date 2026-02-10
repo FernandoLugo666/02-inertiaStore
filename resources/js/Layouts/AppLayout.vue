@@ -3,12 +3,15 @@
     <Sidebar />
 
     <main class="content">
+      <FlashMessage />
+
       <slot />
     </main>
   </div>
 </template>
 
 <script setup>
+import FlashMessage from "@/Components/FlashMessage.vue";
 import Sidebar from "@/Pages/menu/Sidebar.vue";
 </script>
 
