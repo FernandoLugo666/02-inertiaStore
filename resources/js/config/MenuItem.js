@@ -25,7 +25,19 @@ export const menuItems = [
     {
         label: 'Posts',
         icon: 'pi pi-book',
-        route: '/post'
+        route: '/post',
+        subItems: [
+            {
+                label: "Lista de Posts",
+                icon: "pi pi-list",
+                route: '/post/post-list'
+            },
+            {
+                label: "Crear Posts",
+                icon: "pi pi-list",
+                route: '/post/create-post'
+            }
+        ]
     },
     {
         label: 'Extra',

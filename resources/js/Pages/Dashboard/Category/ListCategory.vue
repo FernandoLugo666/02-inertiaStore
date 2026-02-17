@@ -13,11 +13,16 @@
   <div class="table-container">
     <table class="w-full">
       <thead>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Slug</th>
-        <th>Actions</th>
+        <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Slug</th>
+          <th>Actions</th>
+        </tr>
+
+        <tr></tr>
       </thead>
+
       <tbody>
         <tr v-for="i in data" :key="i.id">
           <td class="p-2">{{ i.id }}</td>
@@ -41,10 +46,12 @@
   <div class="table-container">
     <table class="w-full">
       <thead>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Slug</th>
-        <th>Actions</th>
+        <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Slug</th>
+          <th>Actions</th>
+        </tr>
       </thead>
       <tbody>
         <tr v-for="i in dataPaginada.data" :key="i.id">

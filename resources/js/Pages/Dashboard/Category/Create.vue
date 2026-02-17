@@ -50,6 +50,6 @@ function submit() {
 }
 
 function errorField(key) {
-  return this.form.errors[key] ?? null;
+  return form.errors[key] ?? null;
 }
 </script>

@@ -40,3 +40,9 @@ Route::group(['prefix' => 'category'], function () {
     Route::delete("/delete-category/{id}", [CategoryController::class, 'deleteCategory'])->name("deleteCategory");
     Route::get("/delete-category/{id}", [CategoryController::class, 'deleteCategory'])->name("deleteCategory");
 });
+
+Route::group(['prefix' => 'post'], function () {
+    Route::get('/post-list', [PostController::class, 'postList'])->name('postList');
+    Route::get('/create-post', [PostController::class, 'createPost'])->name('createPost');
+    Route::post('/create-post', [PostController::class, 'createPost'])->name('createPost');
+});
