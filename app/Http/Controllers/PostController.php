@@ -26,8 +26,6 @@ class PostController extends Controller
     {
         if ($request->isMethod('POST')) {
             try {
-                // dd($request->all());
-
                 Post::create([
                     'title' => $request->title,
                     'slug' => $request->slug,
@@ -41,5 +39,29 @@ class PostController extends Controller
             }
         }
         return Inertia::render("Dashboard/Post/CreatePost");
+    }
+
+    public function updatePost(PostRequest $request, $id)
+    {
+        $data = Post::findOrFail($id);
+
+        if ($request->isMethod('PUT')) {
+            try {
+                $data->update([
+                    'title' => $request->title,
+                    'slug' => $request->slug,
+                    'date' => $request->date,
+                    'description' => $request->description,
+                ]);
+
+                Log::debug('Succes updatePost');
+                return redirect()->back()->with('success', 'Se actualizó el Post correctamente');
+            } catch (Throwable $th) {
+                Log::debug('Error updatePost ' . $th->getMessage());
+                return redirect()->back()->with('error', 'NO se pudo actualizar el Post');
+            }
+        }
+
+        return Inertia::render("Dashboard/Post/UpdatePost", ["data" => $data]);
     }
 }

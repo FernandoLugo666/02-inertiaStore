@@ -1,19 +1,20 @@
 <template>
   <div>
-    <FloatLabel>
-      <DatePicker
-        v-model="internalValue"
-        :disabled="disabled"
-        showIcon
-        iconDisplay="input"
-      />
+    <div>
+      <FloatLabel>
+        <DatePicker
+          v-model="internalValue"
+          :disabled="disabled"
+          showIcon
+          iconDisplay="input"
+        />
 
-      <label>
-        {{ label }}
-        <span v-if="required" class="text-red-500 font-bold">*</span>
-      </label>
-    </FloatLabel>
-
+        <label>
+          {{ label }}
+          <span v-if="required" class="text-red-500 font-bold">*</span>
+        </label>
+      </FloatLabel>
+    </div>
     <Message v-if="invalid" class="mt-2" severity="error" closable>
       {{ invalid }}
     </Message>
@@ -50,8 +51,24 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
-const internalValue = ref(props.modelValue);
+const internalValue = ref(null);
 
+// Cuando el padre cambie el valor (ej. al cargar edición)
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (!newValue) {
+      internalValue.value = null;
+      return;
+    }
+
+    // Si viene como string tipo "2026-02-17"
+    internalValue.value = typeof newValue === "string" ? new Date(newValue) : newValue;
+  },
+  { immediate: true }
+);
+
+// Cuando el usuario cambie la fecha en el picker
 watch(internalValue, (newValue) => {
   if (!newValue) {
     emit("update:modelValue", null);

@@ -33,6 +33,13 @@ class PostRequest extends FormRequest
                     'description' => 'required',
                 ];
                 break;
+            case 'PUT':
+                return [
+                    'title' => 'required',
+                    'slug' => 'required',
+                    'date' => 'required',
+                    'description' => 'required',
+                ];
         }
     }
 

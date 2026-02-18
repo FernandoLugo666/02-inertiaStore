@@ -38,5 +38,18 @@ const columns = [
     title: "Descripción",
     field: "description",
   },
+  {
+    type: "action",
+    title: "Acciones",
+    elements: [
+      {
+        type: "link",
+        title: "Actualizar",
+        icon: "pi pi-pencil",
+        href: "/post/update-post/",
+        color: "blue",
+      },
+    ],
+  },
 ];
 </script>
