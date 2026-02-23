@@ -1,8 +1,12 @@
 <template>
-  <!-- <p>{{ data }}</p> -->
+  <Title title="Actualizar Post" />
+
   <form @submit.prevent="submit">
-    <div class="row">
-      <div class="mt-10">
+    <div class="grid mt-5">
+      <!-- Título -->
+      <!-- Aqui  en pantalla mediana de las 12 columnas ocupo 6 osea caben 2       -->
+      <!-- Aqui  en pantalla chica de las 12 columnas ocupo 12 osea cabe 1       -->
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.title"
           label="Titulo"
@@ -10,7 +14,9 @@
           :invalid="errorField('title')"
         />
       </div>
-      <div class="mt-10">
+
+      <!-- Slug -->
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.slug"
           label="Slug"
@@ -18,15 +24,19 @@
           :invalid="errorField('slug')"
         />
       </div>
-      <div class="mt-10">
+
+      <!-- Fecha -->
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputDate
           v-model="form.date"
-          label="Slug"
+          label="Fecha"
           required
           :invalid="errorField('date')"
         />
       </div>
-      <div class="mt-10">
+
+      <!-- Descripción -->
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.description"
           label="Descripción"
@@ -34,21 +44,35 @@
           :invalid="errorField('description')"
         />
       </div>
+
+      <!-- Imagen -->
+      <div class="col-12 md:col-6 lg:col-4 p-3">
+        <CustomInputImage
+          v-model="form.image"
+          label="Imagen"
+          required
+          :invalid="errorField('image')"
+        />
+      </div>
     </div>
-    <div class="mt-10 flex justify-center items-center">
+
+    <div class="mt-5 flex justify-content-center">
       <Button label="Actualizar" type="submit" />
     </div>
   </form>
 </template>
+
 <script setup>
 import CustomInputDate from "@/Components/CustomInputDate.vue";
 import CustomInputField from "@/Components/CustomInputField.vue";
+import CustomInputImage from "@/Components/CustomInputImage.vue";
+import Title from "@/Components/Title.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { useForm } from "@inertiajs/vue3";
-import { Button } from "primevue";
+import Button from "primevue/button";
 
 const props = defineProps({
-  data: Array,
+  data: Object,
 });
 
 defineOptions({
@@ -56,10 +80,11 @@ defineOptions({
 });
 
 const form = useForm({
-  title: props.data.title || "",
-  slug: props.data.slug || "",
-  date: props.data.date || "",
-  description: props.data.description || "",
+  title: props.data?.title || "",
+  slug: props.data?.slug || "",
+  date: props.data?.date || "",
+  description: props.data?.description || "",
+  image: null,
 });
 
 function errorField(key) {
@@ -67,8 +92,10 @@ function errorField(key) {
 }
 
 function submit() {
-  form.put(route("updatePost", props.data.id), {
-    onSucces: () => {
+  form.post(route("updatePost", props.data.id), {
+    _method: "put",
+    forceFormData: true,
+    onSuccess: () => {
       console.log("Se actualizó el Post");
     },
     onError: () => {
