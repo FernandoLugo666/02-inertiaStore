@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="block mb-2 font-semibold">
+    <label class="block mb-2 font-semibold text-gray-500">
       {{ label }}
       <span v-if="required" class="text-red-500">*</span>
     </label>
