@@ -1,9 +1,9 @@
 <template>
+  <!-- {{ data }} -->
   <Title title="Actualizar Post" />
 
   <form @submit.prevent="submit">
     <div class="grid mt-5">
-      <!-- Título -->
       <!-- Aqui  en pantalla mediana de las 12 columnas ocupo 6 osea caben 2       -->
       <!-- Aqui  en pantalla chica de las 12 columnas ocupo 12 osea cabe 1       -->
       <div class="col-12 md:col-6 lg:col-4 p-3">
@@ -15,7 +15,6 @@
         />
       </div>
 
-      <!-- Slug -->
       <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.slug"
@@ -25,7 +24,6 @@
         />
       </div>
 
-      <!-- Fecha -->
       <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputDate
           v-model="form.date"
@@ -35,7 +33,6 @@
         />
       </div>
 
-      <!-- Descripción -->
       <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.description"
@@ -45,13 +42,11 @@
         />
       </div>
 
-      <!-- Imagen -->
-      <div class="col-12 md:col-6 lg:col-4 p-3">
-        <CustomInputImage
-          v-model="form.image"
-          label="Imagen"
-          required
-          :invalid="errorField('image')"
+      <div v-if="props.data?.image" class="col-12 md:col-6 lg:col-4 p-3">
+        <p class="mb-2 text-gray-500">Imagen actual:</p>
+        <img
+          :src="`/storage/${props.data.image}`"
+          class="w-20rem border-round shadow-2"
         />
       </div>
     </div>
@@ -84,7 +79,6 @@ const form = useForm({
   slug: props.data?.slug || "",
   date: props.data?.date || "",
   description: props.data?.description || "",
-  image: null,
 });
 
 function errorField(key) {
@@ -93,8 +87,6 @@ function errorField(key) {
 
 function submit() {
   form.post(route("updatePost", props.data.id), {
-    _method: "put",
-    forceFormData: true,
     onSuccess: () => {
       console.log("Se actualizó el Post");
     },

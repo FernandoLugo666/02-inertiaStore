@@ -26,6 +26,8 @@
       </template>
 
       <!-- Columna de acciones -->
+
+      <!-- Aqui el "slotProps.data" es la fila completa actual del DataTable       -->
       <template v-else-if="col.type === 'action'" #body="slotProps">
         <div class="flex gap-2">
           <template v-for="(el, idx) in col.elements" :key="idx">

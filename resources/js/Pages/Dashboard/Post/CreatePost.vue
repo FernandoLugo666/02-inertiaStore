@@ -1,8 +1,8 @@
 <template>
   <Title title="Crear Post" />
   <form @submit.prevent="submit">
-    <div class="row">
-      <div class="col-sm-12 col-md-6 col-lg-4 mt-6">
+    <div class="grid">
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.title"
           label="Titulo del Post"
@@ -11,7 +11,7 @@
         />
       </div>
 
-      <div class="col-sm-12 col-md-6 col-lg-4 mt-6">
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.slug"
           label="Slug"
@@ -20,16 +20,24 @@
         />
       </div>
 
-      <div class="col-sm-12 col-md-6 col-lg-4 mt-6">
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputDate v-model="form.date" label="Ingresa una fecha" />
       </div>
 
-      <div class="col-sm-12 col-md-6 col-lg-4 mt-5">
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.description"
           label="Descripción"
           required
           :invalid="errorField('description')"
+        />
+      </div>
+      <div class="col-12 md:col-6 lg:col-4 p-3">
+        <CustomInputImage
+          v-model="form.image"
+          label="Imagen"
+          required
+          :invalid="errorField('image')"
         />
       </div>
     </div>
@@ -42,6 +50,7 @@
 <script setup>
 import CustomInputDate from "@/Components/CustomInputDate.vue";
 import CustomInputField from "@/Components/CustomInputField.vue";
+import CustomInputImage from "@/Components/CustomInputImage.vue";
 import Title from "@/Components/Title.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { useForm } from "@inertiajs/vue3";
@@ -56,12 +65,23 @@ const form = useForm({
   slug: "",
   date: "",
   description: "",
+  image: null,
 });
 function errorField(key) {
   return form.errors[key] ?? null;
 }
 
 function submit() {
-  form.post(route("createPost"));
+  form.post(route("createPost"), {
+    _method: "put",
+    forceFormData: true,
+
+    onSuccess: () => {
+      console.log("Se actualizó el Post");
+    },
+    onError: () => {
+      console.log("Ocurrió un problema");
+    },
+  });
 }
 </script>

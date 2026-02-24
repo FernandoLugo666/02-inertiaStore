@@ -8,6 +8,7 @@
 import Table from "@/Components/Table.vue";
 import Title from "@/Components/Title.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { router } from "@inertiajs/vue3";
 
 defineOptions({
   layout: AppLayout,
@@ -16,6 +17,14 @@ defineOptions({
 const props = defineProps({
   data: Array,
 });
+
+function deletePost(row) {
+  router.delete(route("deletePost", row.id), {
+    onSuccess: () => {
+      console.log("Se eliminó correctamente");
+    },
+  });
+}
 
 const columns = [
   {
@@ -48,6 +57,13 @@ const columns = [
         icon: "pi pi-pencil",
         href: "/post/update-post/",
         color: "blue",
+      },
+      {
+        type: "button",
+        title: "Eliminar",
+        icon: "pi pi-trash",
+        color: "red",
+        onClick: deletePost,
       },
     ],
   },
