@@ -1,8 +1,8 @@
 <template>
   <Title title="Crear Post" />
   <form @submit.prevent="submit">
-    <div class="grid">
-      <div class="col-12 md:col-6 lg:col-4 p-3">
+    <div class="grid mt-5">
+      <div class="col-12 md:col-6 lg:col-4 p-3 m">
         <CustomInputField
           v-model="form.title"
           label="Titulo del Post"
@@ -77,7 +77,7 @@ function submit() {
     forceFormData: true,
 
     onSuccess: () => {
-      console.log("Se actualizó el Post");
+      console.log("Se Creó el Post");
     },
     onError: () => {
       console.log("Ocurrió un problema");

@@ -21,7 +21,6 @@
     .custom-table .p-datatable-thead>tr>th {
         background-color: #111827;
         color: #e5e7eb;
-        border-bottom-color: #10b981;
     }
 
     .custom-table .p-datatable-tbody>tr>td {
@@ -49,8 +48,8 @@
 .custom-table .p-datatable-tbody>tr>td {
     padding: 0.75rem;
     border-bottom: 1px solid #e5e7eb;
-    background-color: rgb(74, 192, 246);
-    color: #fff;
+    background-color: rgb(74, 192, 246) !important;
+    color: #fff !important;
 }
 
 .custom-table .p-datatable-tbody>tr:hover {
@@ -62,4 +61,10 @@
     padding: 10px;
     background-color: var(--bg-table);
     border-radius: 10px;
+}
+
+.customConfirm {
+    background-color: #435b7c !important;
+    border-radius: 10px;
+    color: #fff !important;
 }

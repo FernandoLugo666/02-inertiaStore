@@ -1,14 +1,26 @@
 <template>
   <Title title="Lista de posts" />
-  <!-- {{ data }} -->
   <Table :data="data" :columns="columns" />
+
+  <div>
+    <!-- Aqui coloco las emisiones de mi componente para hacer una u otra oacción     -->
+    <CustomConfirm
+      message="¿Estás seguro de que deseas eliminar este post?"
+      header="Eliminar Post"
+      :showDialog="showDialogsConfirm"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
+  </div>
 </template>
 
 <script setup>
+import CustomConfirm from "@/Components/CustomConfirm.vue";
 import Table from "@/Components/Table.vue";
 import Title from "@/Components/Title.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { router } from "@inertiajs/vue3";
+import { ref } from "vue";
 
 defineOptions({
   layout: AppLayout,
@@ -18,12 +30,31 @@ const props = defineProps({
   data: Array,
 });
 
+const showDialogsConfirm = ref(false);
+const selectRow = ref(null);
+
+//Funcion para borrar
 function deletePost(row) {
-  router.delete(route("deletePost", row.id), {
+  showDialogsConfirm.value = true;
+  selectRow.value = row;
+  console.log(selectRow.value);
+  console.log(selectRow.value.id);
+}
+
+//Ejecutar cuando el usuario confirme la eliminación.
+
+function confirmDelete() {
+  if (!selectRow.value) return;
+  router.delete(route("deletePost", selectRow.value.id), {
     onSuccess: () => {
-      console.log("Se eliminó correctamente");
+      console.log("Post eliminado correctamente");
     },
   });
+  showDialogsConfirm.value = false;
+}
+
+function cancelDelete() {
+  showDialogsConfirm.value = false;
 }
 
 const columns = [
@@ -63,7 +94,7 @@ const columns = [
         title: "Eliminar",
         icon: "pi pi-trash",
         color: "red",
-        onClick: deletePost,
+        onClick: (row) => deletePost(row),
       },
     ],
   },
