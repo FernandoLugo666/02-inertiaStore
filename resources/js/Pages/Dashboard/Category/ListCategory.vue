@@ -6,6 +6,15 @@
   <div class="table-container">
     <Table :data="data" :columns="columns"></Table>
   </div>
+
+  <CustomConfirm
+    header="Eliminar Categoria"
+    message="¿Esta seguro de que desea eliminar este registro?"
+    :showDialog="showDialogConfirm"
+    @confirm="confirmDelete"
+    @cancel="cancelDelete"
+  />
+
   <h1 class="flex justify-center items-center mt-10 font-bold text-2xl mb-10">
     Tabla manual Creada
   </h1>
@@ -81,7 +90,7 @@
   </h1>
 
   <div class="table-container">
-    <!--Paginado con CFOmponente de vue-->
+    <!--Paginado con Componente de vue-->
 
     <Table :data="dataperPage.data" :columns="columns" paginator />
   </div>
@@ -94,6 +103,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link, router } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 import { usePage } from "@inertiajs/vue3";
+import CustomConfirm from "@/Components/CustomConfirm.vue";
 
 const page = usePage();
 const successMessage = ref(null);
@@ -122,6 +132,34 @@ const props = defineProps({
   },
 });
 
+const showDialogConfirm = ref(false);
+const selectRow = ref(null);
+
+function deletePost(row) {
+  showDialogConfirm.value = true;
+  selectRow.value = row;
+
+  console.log(selectRow.value);
+  console.log(selectRow.value.id);
+}
+
+function confirmDelete() {
+  if (!selectRow.value) return;
+
+  router.delete(route("deleteCategory", selectRow.value.id), {
+    onSuccess: () => {
+      showDialogConfirm.value = false;
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+      console.log("Categoria eliminada correctamente");
+    },
+  });
+}
+
+function cancelDelete() {
+  showDialogConfirm.value = false;
+}
 const columns = [
   {
     type: "field",
@@ -149,9 +187,7 @@ const columns = [
         title: "Eliminar",
         icon: "pi-trash",
         color: "red",
-        onClick: (row) => {
-          router.delete(`/category/delete-category/${row.id}`);
-        },
+        onClick: (row) => deletePost(row),
       },
     ],
   },

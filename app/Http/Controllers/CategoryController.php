@@ -60,7 +60,7 @@ class CategoryController extends Controller
         try {
             $data->delete();
 
-            return back()->with('success', 'Registro eliminado correctamente');
+            return redirect()->back()->with('success', 'Registro eliminado correctamente');
         } catch (\Throwable $th) {
             Log::debug("Error deleteCategory " . $th->getMessage());
         }

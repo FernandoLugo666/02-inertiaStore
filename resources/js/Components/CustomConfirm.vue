@@ -37,8 +37,11 @@ import Button from "primevue/button";
 import { computed } from "vue";
 
 const props = defineProps({
-  header: String,
-  message: String,
+  header: {
+    type: String,
+    required: true,
+  },
+  message: { type: String, required: true },
   showDialog: Boolean,
 });
 
