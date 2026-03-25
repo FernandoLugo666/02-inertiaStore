@@ -2,7 +2,7 @@
   <Title title="Crear Post" />
   <form @submit.prevent="submit">
     <div class="grid mt-5">
-      <div class="col-12 md:col-6 lg:col-4 p-3 m">
+      <div class="col-12 md:col-6 lg:col-4 p-3">
         <CustomInputField
           v-model="form.title"
           label="Titulo del Post"

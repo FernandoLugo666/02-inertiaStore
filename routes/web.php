@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PostController;
 use Illuminate\Foundation\Application;
@@ -49,4 +50,9 @@ Route::group(['prefix' => 'post'], function () {
     Route::put('/update-post/{id}',  [PostController::class, 'updatePost'])->name('updatePost');
     Route::post('/update-post/{id}',  [PostController::class, 'updatePost'])->name('updatePost');
     Route::delete('/delete-post/{id}', [PostController::class, 'deletePost'])->name('deletePost');
+});
+
+Route::group(['prefix' => 'contact'], function () {
+    Route::get('/general', [GeneralController::class, 'generalTable'])->name('generalTable');
+    Route::get('/create', [GeneralCOntroller::class, 'crearContacto'])->name('crearContacto');
 });

@@ -40,8 +40,16 @@ export const menuItems = [
         ]
     },
     {
-        label: 'Extra',
-        icon: 'pi pi-book',
-        route: '/post'
+        label: 'Contactos',
+        icon: 'pi pi-address-book',
+        route: '/contact',
+        subItems: [
+            {
+                label: "Lista de contactos",
+                icon: 'pi pi-list',
+                route: '/contact/general'
+
+            }
+        ]
     }
 ]
