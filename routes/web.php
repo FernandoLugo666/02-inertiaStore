@@ -55,4 +55,7 @@ Route::group(['prefix' => 'post'], function () {
 Route::group(['prefix' => 'contact'], function () {
     Route::get('/general', [GeneralController::class, 'generalTable'])->name('generalTable');
     Route::get('/create', [GeneralCOntroller::class, 'crearContacto'])->name('crearContacto');
+    Route::post('/create', [GeneralCOntroller::class, 'crearContacto'])->name('crearContacto');
+    Route::get('/update-contact/{id}', [GeneralController::class, 'updateContact'])->name('updateContact');
+    Route::put('/update-contact/{id}', [GeneralController::class, 'updateContact'])->name('updateContact');
 });

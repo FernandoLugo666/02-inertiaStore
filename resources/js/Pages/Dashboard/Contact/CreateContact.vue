@@ -19,6 +19,10 @@
           />
         </div>
       </div>
+
+      <div class="flex justify-center mt-5">
+        <Button label="Crear Contacto" type="submit" />
+      </div>
     </form>
   </div>
 </template>
@@ -29,6 +33,7 @@ import CustomSelectField from "@/Components/CustomSelectField.vue";
 import Title from "@/Components/Title.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { useForm } from "@inertiajs/vue3";
+import { Button } from "primevue";
 import { ref } from "vue";
 defineOptions({
   layout: AppLayout,
@@ -40,4 +45,15 @@ const form = useForm({
   message: "",
   type: "",
 });
+
+function submit() {
+  form.post(route("crearContacto"), {
+    onSuccess: () => {
+      console.log("Se Enviaron los datos de contacto");
+    },
+    onError: () => {
+      console.log("Ocurrió un problema al enviar los datos");
+    },
+  });
+}
 </script>
