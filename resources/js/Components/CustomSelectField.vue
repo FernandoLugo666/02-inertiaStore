@@ -5,6 +5,7 @@
       @update:modelValue="updateValue"
       :options="options"
       :optionLabel="optionLabel"
+      :optionValue="optionValue"
       :placeholder="placeholder"
       :class="['w-full', { 'font-bold': disabled }]"
     />
@@ -12,7 +13,8 @@
   </FloatLabel>
 </template>
 <script setup>
-import { FloatLabel, Select } from "primevue";
+import { FloatLabel } from "primevue";
+import { Select } from "primevue";
 
 const props = defineProps({
   modelValue: {
@@ -27,6 +29,10 @@ const props = defineProps({
   optionLabel: {
     type: String,
     default: "name",
+  },
+  optionValue: {
+    type: String,
+    default: "value",
   },
   placeholder: {
     type: String,
