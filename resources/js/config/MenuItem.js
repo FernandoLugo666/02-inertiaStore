@@ -51,5 +51,17 @@ export const menuItems = [
 
             }
         ]
+    }, {
+        label: 'Compañias',
+        icon: "pi pi-building",
+        route: '/company',
+        subItems: [
+            {
+                label: "Lista de compañias",
+                icon: 'pi pi-list',
+                route: '/company/list-company'
+            }
+        ]
+
     }
 ]
