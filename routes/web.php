@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\PostController;
@@ -29,7 +30,6 @@ use Inertia\Inertia;
 
 
 // ************************
-// Route::get('/', [PostController::class, 'index']);
 Route::get('/', [InicioController::class, 'sidebar'])->name('sidebar@@');
 
 Route::group(['prefix' => 'category'], function () {
@@ -54,8 +54,17 @@ Route::group(['prefix' => 'post'], function () {
 
 Route::group(['prefix' => 'contact'], function () {
     Route::get('/general', [GeneralController::class, 'generalTable'])->name('generalTable');
-    Route::get('/create', [GeneralCOntroller::class, 'crearContacto'])->name('crearContacto');
-    Route::post('/create', [GeneralCOntroller::class, 'crearContacto'])->name('crearContacto');
+    Route::get('/create', [GeneralController::class, 'crearContacto'])->name('crearContacto');
+    Route::post('/create', [GeneralController::class, 'crearContacto'])->name('crearContacto');
     Route::get('/update-contact/{id}', [GeneralController::class, 'updateContact'])->name('updateContact');
     Route::put('/update-contact/{id}', [GeneralController::class, 'updateContact'])->name('updateContact');
+});
+
+
+Route::group(['prefix' => 'company'], function () {
+    Route::get('/list-company', [CompanyController::class, 'listCompany'])->name("listCompany");
+    Route::get('/create-company', [CompanyController::class, 'createCompany'])->name("createCompany");
+    Route::post('/create-company', [CompanyController::class, 'createCompany'])->name("createCompany");
+    Route::get('/update-company/{id}', [CompanyController::class, 'updateCompany'])->name("updateCompany");
+    Route::put('/update-company/{id}', [CompanyController::class, 'updateCompany'])->name("updateCompany");
 });
